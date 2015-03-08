@@ -1,26 +1,17 @@
 __author__ = 'Властелин Вселенной'
 from selenium.webdriver.firefox.webdriver import WebDriver
+from fixture.session import SessionHelper
 
 class Application:
 
     def __init__(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
+        self.session = SessionHelper(self)
 
     def open_home_page(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/group.php")
-
-    def login(self, username, password):
-        wd = self.wd
-        self.open_home_page()
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_id("LoginForm").click()
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_css_selector("html").click()
-        wd.find_element_by_css_selector("input[type=\"submit\"]").click()
 
     def click_create_group(self):
         wd = self.wd
@@ -135,10 +126,6 @@ class Application:
     def open_contact_page(self):
         wd = self.wd
         wd.find_element_by_xpath("//div/div[4]/div/i/a[2]").click()
-
-    def logout(self):
-        wd = self.wd
-        wd.find_element_by_link_text("Изход").click()
 
     def destroy(self):
          self.wd.quit()
