@@ -17,10 +17,6 @@ class ContactHelper:
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(group.notes)
 
-    def click_enter_btn(self):
-        wd = self.app.wd
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-
     def enter_phone_numbers(self, group):
         wd = self.app.wd
         wd.find_element_by_name("home").click()
@@ -92,6 +88,10 @@ class ContactHelper:
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(group.homepage)
+
+    def click_enter_btn(self):
+        wd = self.app.wd
+        wd.find_element_by_name("submit").click()
 
     def open_contact_page(self):
         wd = self.app.wd
