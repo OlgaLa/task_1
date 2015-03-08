@@ -13,11 +13,11 @@ def app(request):
 
 def test_add_contact(app):
     app.session.login(username="admin", password="secret")
-    app.add_new_contact(Contact(firstname="aaaaaa", middlename="mmmmmm", lastname="a", nickname="a", title="k", homepage="m", company="dd", address="dd"))
-    app.enter_phone_numbers(Phones(mobile="ssss", fax="s", home="a", work="djd"))
-    app.enter_emails(Emails(email2="aaaaa", email="dd", email3="dk"))
-    app.enter_address(Address(address2="address", phone2="phone", notes="notes"))
-    app.enter_value_dropdown()
-    app.click_enter_btn()
-    app.open_contact_page()
+    app.contact.add_new_contact(Contact(firstname="aaaaaa", middlename="mmmmmm", lastname="a", nickname="a", title="k", homepage="m", company="dd", address="dd"))
+    app.contact.enter_phone_numbers(Phones(mobile="ssss", fax="s", home="a", work="djd"))
+    app.contact.enter_emails(Emails(email2="aaaaa", email="dd", email3="dk"))
+    app.contact.enter_address(Address(address2="address", phone2="phone", notes="notes"))
+    app.contact.enter_value_dropdown()
+    app.contact.click_enter_btn()
+    app.contact.open_contact_page()
     app.session.logout()
