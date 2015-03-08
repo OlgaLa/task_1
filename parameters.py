@@ -16,6 +16,7 @@ class Address:
         self.phone2=phone2
         self.notes=notes
 
+
 class Phones:
 
     def __init__(self, home, mobile, work, fax):
@@ -24,6 +25,7 @@ class Phones:
         self.work=work
         self.fax=fax
 
+
 class Emails:
 
     def __init__(self, email, email2, email3):
@@ -31,7 +33,9 @@ class Emails:
         self.email2=email2
         self.email3=email3
 
+
 class Contact:
+
     def __init__(self, firstname, middlename, lastname, nickname, title, company, address, homepage):
         self.firstname=firstname
         self.middlename=middlename

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from  group import *
+from  parameters import *
 from application import Application
 
 
