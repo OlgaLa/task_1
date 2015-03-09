@@ -1,4 +1,4 @@
-__author__ = 'Властелин Вселенной'
+from selenium.webdriver.support import expected_conditions as EC
 
 class ContactHelper:
 
@@ -65,7 +65,6 @@ class ContactHelper:
 
     def add_new_contact(self, group):
         wd = self.app.wd
-        wd.find_element_by_link_text("добави нов").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(group.firstname)
@@ -89,10 +88,41 @@ class ContactHelper:
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(group.homepage)
 
+    def click_add_new_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("добави нов").click()
+
     def click_enter_btn(self):
         wd = self.app.wd
-        wd.find_element_by_name("submit").click()
+        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        # wd.find_element_by_name("submit").click()
 
     def open_contact_page(self):
         wd = self.app.wd
         wd.find_element_by_xpath("//div/div[4]/div/i/a[2]").click()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        self.select_first_contact()
+        # submit deletion
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        alert = wd.switch_to_alert()
+        alert.accept()
+
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
+    def click_edit_button(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+
+    def click_update_btn(self):
+        wd = self.app.wd
+        wd.find_element_by_name("update").click()
+
+
+    def open_contact_page(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("начало").click()

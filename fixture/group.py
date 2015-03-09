@@ -4,16 +4,18 @@ __author__ = 'Властелин Вселенной'
 class GroupHelper:
 
     def __init__(self, app):
-        self.app=app
+        self.app = app
 
     def click_create_group(self):
         wd = self.app.wd
         wd.find_element_by_link_text("групи").click()
 
+    def click_new_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("new").click()
+
     def create(self, group):
         wd = self.app.wd
-        self.click_create_group()
-        wd.find_element_by_name("new").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
         wd.find_element_by_name("group_name").send_keys(group.name)
@@ -23,19 +25,34 @@ class GroupHelper:
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys(group.footer)
-        # submit group creation
+
+    def submit_group_creation(self):
+        wd = self.app.wd
         wd.find_element_by_name("submit").click()
+        self.open_group_page()
+
+    def update_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("update").click()
         self.open_group_page()
 
     def delete_first_group(self):
         wd = self.app.wd
-        self.click_create_group()
-        # select first group
-        wd.find_element_by_name("selected[]").click()
+        self.select_group()
         # submit deletion
         wd.find_element_by_name("delete").click()
         self.open_group_page()
 
+    def select_group(self):
+        wd = self.app.wd
+        self.click_create_group()
+        # select first group
+        wd.find_element_by_name("selected[]").click()
+
     def open_group_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
+
+    def click_edit_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("edit").click()
