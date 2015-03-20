@@ -58,3 +58,8 @@ class GroupHelper:
     def click_edit_group(self):
         wd = self.app.wd
         wd.find_element_by_name("edit").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.click_create_group()
+        return len(wd.find_elements_by_name("selected[]"))
