@@ -90,16 +90,13 @@ class ContactHelper:
 
     def click_add_new_contact(self):
         wd = self.app.wd
+        #if not (wd.current_url_endswith("edit.php") and len(wd.find_elements_by_name("submit")) > 0):
         wd.find_element_by_link_text("добави нов").click()
 
     def click_enter_btn(self):
         wd = self.app.wd
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         # wd.find_element_by_name("submit").click()
-
-    def open_contact_page(self):
-        wd = self.app.wd
-        wd.find_element_by_xpath("//div/div[4]/div/i/a[2]").click()
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -120,7 +117,8 @@ class ContactHelper:
 
     def open_contact_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("начало").click()
+        if not (len(wd.find_elements_by_xpath("id('search_count')")) > 0):
+            wd.find_element_by_link_text("начало").click()
 
     def count_contacts(self):
         wd = self.app.wd
