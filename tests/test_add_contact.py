@@ -3,7 +3,6 @@ from model.parameters import *
 
 
 def test_add_contact(app):
-    app.session.login(username="admin", password="secret")
     app.contact.click_add_new_contact()
     app.contact.add_new_contact(Contact(firstname="aaaaaa", middlename="mmmmmm", lastname="a", nickname="aaaaaaaa", title="k", homepage="m", company="dd", address="dd"))
     app.contact.enter_phone_numbers(Phones(mobile="ssss", fax="s", home="a", work="djd"))
@@ -12,4 +11,4 @@ def test_add_contact(app):
     # app.contact.enter_value_dropdown()
     app.contact.click_enter_btn()
     app.contact.open_contact_page()
-    app.session.logout()
+

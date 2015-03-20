@@ -2,7 +2,6 @@ from model.parameters import *
 
 
 def test_modify_first_contact(app):
-    app.session.login(username="admin", password="secret")
     app.contact.open_contact_page()
     app.contact.select_first_contact()
     app.contact.click_edit_button()
@@ -12,5 +11,5 @@ def test_modify_first_contact(app):
     app.contact.enter_address(Address(address2="1", phone2="1", notes="1"))
     app.contact.click_update_btn()
     app.contact.open_contact_page()
-    app.session.logout()
+
 
