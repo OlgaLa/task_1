@@ -3,23 +3,8 @@ from model.parameters import *
 
 def test_modify_first_contact(app):
     if app.contact.count_contacts() == 0:
-        app.contact.click_add_new_contact()
-        app.contact.add_new_contact(Contact(firstname="aaaaaa", middlename="mmmmmm", lastname="a", nickname="aaaaaaaa", title="k", homepage="m", company="dd", address="dd"))
-        app.contact.enter_phone_numbers(Phones(mobile="ssss", fax="s", home="a", work="djd"))
-        app.contact.enter_emails(Emails(email2="aaaaa", email="dd", email3="dk"))
-        app.contact.enter_address(Address(address2="address", phone2="phone", notes="notes"))
-        app.contact.click_enter_btn()
-        app.contact.open_contact_page()
+        app.contact.create_new_contact(Contact(firstname="1a", middlename="1", lastname="a", nickname="1", title="k", homepage="m", company="1", address="1"), Phones(mobile="1", fax="1", home="1", work="1"), Emails(email2="1", email="1", email3="1"), Address(address2="1", phone2="1", notes="1"))
 
-
-    app.contact.open_contact_page()
-    app.contact.select_first_contact()
-    app.contact.click_edit_button()
-    app.contact.add_new_contact(Contact(firstname="1", middlename="1", lastname="1", nickname="1", title="1", homepage="1", company="1", address="1"))
-    app.contact.enter_phone_numbers(Phones(mobile="1", fax="1", home="1", work="1"))
-    app.contact.enter_emails(Emails(email2="1", email="1", email3="1"))
-    app.contact.enter_address(Address(address2="1", phone2="1", notes="1"))
-    app.contact.click_update_btn()
-    app.contact.open_contact_page()
+    app.contact.modify_first_contact(Contact(firstname="1", middlename="1", lastname="1", nickname="1", title="1", homepage="1", company="1", address="1"), Phones(mobile="1", fax="1", home="1", work="1"), Emails(email2="1", email="1", email3="1"), Address(address2="1", phone2="1", notes="1"))
 
 

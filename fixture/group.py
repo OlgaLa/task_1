@@ -6,11 +6,10 @@ class GroupHelper:
     def __init__(self, app):
         self.app = app
 
-    def click_create_group(self):
+    def open_group_page(self):
         wd = self.app.wd
         if not (wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("new")) > 0):
             wd.find_element_by_link_text("групи").click()
-
 
     def click_new_group(self):
         wd = self.app.wd
@@ -33,27 +32,27 @@ class GroupHelper:
     def submit_group_creation(self):
         wd = self.app.wd
         wd.find_element_by_name("submit").click()
-        self.open_group_page()
+        self.come_back_to_group_page()
 
     def update_group(self):
         wd = self.app.wd
         wd.find_element_by_name("update").click()
-        self.open_group_page()
+        self.come_back_to_group_page()
 
     def delete_first_group(self):
         wd = self.app.wd
         self.select_group()
         # submit deletion
         wd.find_element_by_name("delete").click()
-        self.open_group_page()
+        self.come_back_to_group_page()
 
     def select_group(self):
         wd = self.app.wd
-        self.click_create_group()
+        self.open_group_page()
         # select first group
         wd.find_element_by_name("selected[]").click()
 
-    def open_group_page(self):
+    def come_back_to_group_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
 
@@ -63,5 +62,19 @@ class GroupHelper:
 
     def count(self):
         wd = self.app.wd
-        self.click_create_group()
+        self.open_group_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def create_new_group(self, group):
+        wd = self.app.wd
+        self.open_group_page()
+        self.click_new_group()
+        self.fill_group_fields(group)
+        self.submit_group_creation()
+
+    def modify_first_group(self, group):
+        wd = self.app.wd
+        self.select_group()
+        self.click_edit_group()
+        self.fill_group_fields(group)
+        self.update_group()
