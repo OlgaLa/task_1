@@ -1,5 +1,6 @@
 __author__ = 'Властелин Вселенной'
 
+from model.parameters import Group
 
 class GroupHelper:
 
@@ -78,3 +79,13 @@ class GroupHelper:
         self.click_edit_group()
         self.fill_group_fields(group)
         self.update_group()
+
+    def get_group_list(self):
+        wd = self.app.wd
+        self.open_group_page()
+        groups = []
+        for element in wd.find_elements_by_css_selector("span.group"):
+            text = element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            groups.append(Group(name=text, id =id))
+        return groups

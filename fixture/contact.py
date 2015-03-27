@@ -1,5 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 
+from  model.parameters import Contact
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -146,3 +148,17 @@ class ContactHelper:
         self.enter_address(address)
         self.click_update_btn()
         self.open_contact_page()
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_contact_page()
+        contacts = []
+        for element in wd.find_elements_by_css_selector("tr[name=entry]"):
+            text = element.text
+            print(text)
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            print(id)
+            contacts.append(Contact(firstname=text, id=id))
+        return contacts
+
+
