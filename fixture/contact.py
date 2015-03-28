@@ -101,6 +101,9 @@ class ContactHelper:
         # wd.find_element_by_name("submit").click()
 
     def delete_first_contact(self):
+        self.delete_contact()
+
+    def delete_contact(self):
         wd = self.app.wd
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
@@ -109,6 +112,10 @@ class ContactHelper:
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def click_edit_button(self):
         wd = self.app.wd
@@ -139,10 +146,13 @@ class ContactHelper:
         self.open_contact_page()
         self.contact_cache = None
 
-    def modify_first_contact(self, contacts, phone, email, address):
+    def modify_first_contact(self,):
+        self.modify_contact_by_index(0)
+
+    def modify_contact_by_index(self, contacts, phone, email, address, index):
         wd = self.app.wd
         self.open_contact_page()
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         self.click_edit_button()
         self.add_new_contact(contacts)
         self.enter_phone_numbers(phone)
