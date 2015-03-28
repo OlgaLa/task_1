@@ -104,6 +104,7 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -136,6 +137,7 @@ class ContactHelper:
         self.enter_address(address)
         self.click_enter_btn()
         self.open_contact_page()
+        self.contact_cache = None
 
     def modify_first_contact(self, contacts, phone, email, address):
         wd = self.app.wd
@@ -148,16 +150,20 @@ class ContactHelper:
         self.enter_address(address)
         self.click_update_btn()
         self.open_contact_page()
+        self.contact_cache = None
+
+    contact_cache = None
 
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_contact_page()
-        contacts = []
-        for element in wd.find_elements_by_css_selector("tr[name=entry]"):
-            lastname = element.find_elements_by_css_selector('td')[1].text
-            firstname = element.find_elements_by_css_selector('td')[2].text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(firstname=firstname, lastname=lastname, id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.open_contact_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_css_selector("tr[name=entry]"):
+                lastname = element.find_elements_by_css_selector('td')[1].text
+                firstname = element.find_elements_by_css_selector('td')[2].text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id))
+        return list(self.contact_cache)
 
 
