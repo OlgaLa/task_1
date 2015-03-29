@@ -8,7 +8,7 @@ def test_modify_some_group(app):
 
     old_groups = app.group.get_group_list()
     index = randrange(len(old_groups))
-    group = Group(name="new group")
+    group = Group(name="modify group")
     group.id=old_groups[index].id
     app.group.modify_group_by_index(index, group)
     assert len(old_groups) == app.group.count()

@@ -25,7 +25,7 @@ class Group:
 
 class Address:
 
-    def __init__(self, address2, phone2, notes):
+    def __init__(self, address2=None, phone2=None, notes=None):
         self.address2=address2
         self.phone2=phone2
         self.notes=notes
@@ -33,16 +33,16 @@ class Address:
 
 class Phones:
 
-    def __init__(self, home, mobile, work, fax):
-        self.home=home
-        self.mobile=mobile
-        self.work=work
+    def __init__(self, homephone=None, mobilephone=None, workphone=None, fax=None):
+        self.homephone=homephone
+        self.mobilephone=mobilephone
+        self.workphone=workphone
         self.fax=fax
 
 
 class Emails:
 
-    def __init__(self, email, email2, email3):
+    def __init__(self, email=None, email2=None, email3=None):
         self.email=email
         self.email2=email2
         self.email3=email3
@@ -50,7 +50,11 @@ class Emails:
 
 class Contact:
 
-    def __init__(self, firstname=None, middlename=None, lastname=None, nickname=None, title=None, company=None, address=None, homepage=None, id = None):
+    def __init__(self, firstname=None, middlename=None, lastname=None, id=None, nickname=None,
+                 title=None, company=None, address=None, homepage=None, homephone=None,
+                 mobilephone=None, workphone=None, secondaryphone=None, email=None, email2=None, email3=None,
+                 all_phones_from_home_page=None,
+                 all_emails_from_home_page=None):
         self.middlename=middlename
         self.lastname=lastname
         self.firstname=firstname
@@ -59,6 +63,15 @@ class Contact:
         self.company=company
         self.address=address
         self.homepage=homepage
+        self.homephone=homephone
+        self.mobilephone=mobilephone
+        self.workphone=workphone
+        self.secondaryphone=secondaryphone
+        self.email=email
+        self.email2=email2
+        self.email3=email3
+        self.all_phones_from_home_page=all_phones_from_home_page
+        self.all_emails_from_home_page=all_emails_from_home_page
         self.id=id
 
     def __repr__(self):
