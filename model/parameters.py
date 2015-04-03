@@ -34,10 +34,10 @@ class Address:
 
 class Phones:
 
-    def __init__(self, homephone=None, mobilephone=None, workphone=None, fax=None):
-        self.homephone=homephone
-        self.mobilephone=mobilephone
-        self.workphone=workphone
+    def __init__(self, home=None, mobile=None, work=None, fax=None):
+        self.home=home
+        self.mobile=mobile
+        self.work=work
         self.fax=fax
 
 
@@ -80,7 +80,27 @@ class Contact:
         self.id=id
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
+        return '%s:%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s' % (self.id,
+                                                                             self.firstname,
+                                                                             self.middlename,
+                                                                             self.lastname,
+                                                                             self.nickname,
+                                                                             self.title,
+                                                                             self.company,
+                                                                             self.address,
+                                                                             self.homephone,
+                                                                             self.mobilephone,
+                                                                             self.workphone,
+                                                                             self.fax,
+                                                                             self.email2,
+                                                                             self.email,
+                                                                             self.email3,
+                                                                             self.homepage,
+                                                                             self.address2,
+                                                                             self.secondaryphone,
+                                                                             self.notes)
+
+
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) and self.firstname == other.firstname \
