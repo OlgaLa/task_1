@@ -90,6 +90,34 @@ class ContactHelper:
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contacts.homepage)
+        wd.find_element_by_name("address2").click()
+        wd.find_element_by_name("address2").clear()
+        wd.find_element_by_name("address2").send_keys(contacts.address2)
+        wd.find_element_by_name("phone2").click()
+        wd.find_element_by_name("phone2").clear()
+        wd.find_element_by_name("phone2").send_keys(contacts.secondaryphone)
+        wd.find_element_by_name("notes").click()
+        wd.find_element_by_name("notes").clear()
+        wd.find_element_by_name("notes").send_keys(contacts.notes)
+        wd.find_element_by_name("home").click()
+        wd.find_element_by_name("home").clear()
+        wd.find_element_by_name("home").send_keys(contacts.homephone)
+        wd.find_element_by_name("mobile").click()
+        wd.find_element_by_name("mobile").clear()
+        wd.find_element_by_name("mobile").send_keys(contacts.mobilephone)
+        wd.find_element_by_name("work").click()
+        wd.find_element_by_name("work").clear()
+        wd.find_element_by_name("work").send_keys(contacts.workphone)
+        wd.find_element_by_name("email").click()
+        wd.find_element_by_name("email").clear()
+        wd.find_element_by_name("email").send_keys(contacts.email)
+        wd.find_element_by_name("email2").click()
+        wd.find_element_by_name("email2").clear()
+        wd.find_element_by_name("email2").send_keys(contacts.email2)
+        wd.find_element_by_name("email3").click()
+        wd.find_element_by_name("email3").clear()
+        wd.find_element_by_name("email3").send_keys(contacts.email3)
+
 
     def click_add_new_contact(self):
         wd = self.app.wd
@@ -135,13 +163,10 @@ class ContactHelper:
         self.open_contact_page()
         return len(wd.find_elements_by_name("selected[]"))
 
-    def create_new_contact(self, contacts, phone, email, address):
+    def create_new_contact(self, contacts):
         wd = self.app.wd
         self.click_add_new_contact()
         self.add_new_contact(contacts)
-        self.enter_phone_numbers(phone)
-        self.enter_emails(email)
-        self.enter_address(address)
         self.click_enter_btn()
         self.open_contact_page()
         self.contact_cache = None
@@ -187,7 +212,7 @@ class ContactHelper:
                 cells = row.find_elements_by_css_selector('td')
                 lastname = cells[1].text
                 firstname = cells[2].text
-                id = cells[0].get_attribute("value")
+                id = cells[0].find_element_by_css_selector('input').get_attribute('value')
                 all_phones=cells[5].text
                 address=cells[3].text
                 all_emails=cells[4].text
@@ -208,46 +233,24 @@ class ContactHelper:
         mobilephone =wd.find_element_by_name("mobile").get_attribute("value")
         workphone =wd.find_element_by_name("work").get_attribute("value")
         secondaryphone =wd.find_element_by_name("phone2").get_attribute("value")
-        return Contact(firstname=firstname, lastname=lastname, id=id,
-                   homephone=homephone, mobilephone=mobilephone, workphone=workphone, secondaryphone=secondaryphone)
-
-    def get_address_from_edit_page(self, index):
-        wd = self.app.wd
-        self.open_contact_page()
-        self.select_contact_by_index(index)
-        self.click_edit_button()
-        firstname =wd.find_element_by_name("firstname").get_attribute("value")
-        lastname =wd.find_element_by_name("lastname").get_attribute("value")
-        id =wd.find_element_by_name("id").get_attribute("value")
-        address = wd.find_element_by_name("address").text
-        return Contact(firstname=firstname, lastname=lastname, id=id,
-                   address=address)
-
-    def get_email_info_from_edit_page(self, index):
-        wd = self.app.wd
-        self.open_contact_page()
-        self.select_contact_by_index(index)
-        self.click_edit_button()
-        firstname =wd.find_element_by_name("firstname").get_attribute("value")
-        lastname =wd.find_element_by_name("lastname").get_attribute("value")
-        id =wd.find_element_by_name("id").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
         email = wd.find_element_by_name("email").get_attribute("value")
         email2 = wd.find_element_by_name("email2").get_attribute("value")
         email3 = wd.find_element_by_name("email3").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id,
-                   email=email, email2=email2, email3=email3)
+                   homephone=homephone, mobilephone=mobilephone, workphone=workphone, secondaryphone=secondaryphone,
+                   address=address, email=email, email2=email2, email3=email3)
+
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
         self.open_contact_view_by_index(index)
         text = wd.find_element_by_id("content").text
-        homephone = re.search("H: (.*)", text).group(1)
+        homephone = re.search('H: (.*)', text).group(1)
         mobilephone = re.search("M: (.*)", text).group(1)
         workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, workphone=workphone,
                        mobilephone=mobilephone, secondaryphone=secondaryphone)
-
-
 
 
