@@ -1,4 +1,3 @@
-from selenium.webdriver.support import expected_conditions as EC
 import re
 
 from  model.parameters import Contact
@@ -257,12 +256,29 @@ class ContactHelper:
         wd.find_element_by_css_selector("input[value='%s']" % id).click()
         wd.find_element_by_xpath("//div[@id='content']/form[@name='MainForm']/div[2]/input").click()
 
+    def select_contact_by_id_for_contact_to_group(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
     def delete_contact_by_id(self, id):
         wd = self.app.wd
         self.open_contact_page()
         self.select_contact_by_id(id)
         wd.switch_to_alert().accept()
         self.contact_cache = None
+
+    def add_contact_to_group(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//div[@class='right']/select//option[1]").click()
+        wd.find_element_by_name("add").click()
+
+    def delete_contact_from_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("remove").click()
+
+    def select_group(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//form[@id='right']/select//option[3]").click()
 
 
 

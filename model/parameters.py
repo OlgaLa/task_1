@@ -57,9 +57,9 @@ class Contact:
                  address2=None, notes=None,
                  all_phones_from_home_page=None,
                  all_emails_from_home_page=None):
+        self.firstname=firstname
         self.middlename=middlename
         self.lastname=lastname
-        self.firstname=firstname
         self.nickname=nickname
         self.title=title
         self.company=company
