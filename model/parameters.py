@@ -100,7 +100,6 @@ class Contact:
                                                                              self.secondaryphone,
                                                                              self.notes)
 
-
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) and self.firstname == other.firstname \
                and self.lastname==other.lastname
@@ -112,7 +111,7 @@ class Contact:
             return maxsize
 
     def clear(self, s):
-        return re.sub("[() -]", "", s)
+       return re.sub("[() -]", "", s)
 
     def merge(self, elements):
         return '\n'.join(filter(lambda x: x != "", map(lambda x: self.clear(x), filter(lambda x: x is not None, elements))))
@@ -121,6 +120,8 @@ class Contact:
         self.concatenated_phones = self.merge([self.homephone, self.mobilephone, self.workphone, self.secondaryphone])
         return self.concatenated_phones
 
-    def merge_mails(self):
+    def merge_emails(self):
         self.concatenated_mails = self.merge([self.email, self.email2, self.email3])
         return self.concatenated_mails
+
+
