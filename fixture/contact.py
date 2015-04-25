@@ -117,6 +117,16 @@ class ContactHelper:
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contacts.notes)
 
+    def add_new_contact_short_version(self, contacts):
+        wd = self.app.wd
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(contacts.firstname)
+        wd.find_element_by_name("middlename").click()
+        wd.find_element_by_name("middlename").send_keys(contacts.middlename)
+        wd.find_element_by_name("lastname").clear()
+        wd.find_element_by_name("lastname").send_keys(contacts.lastname)
+
     def click_add_new_contact(self):
         wd = self.app.wd
         wd.find_element_by_link_text("добави нов").click()
@@ -165,6 +175,14 @@ class ContactHelper:
         wd = self.app.wd
         self.click_add_new_contact()
         self.add_new_contact(contacts)
+        self.click_enter_btn()
+        self.open_contact_page()
+        self.contact_cache = None
+
+    def create_new_contact_short(self, contacts):
+        wd = self.app.wd
+        self.click_add_new_contact()
+        self.add_new_contact_short_version(contacts)
         self.click_enter_btn()
         self.open_contact_page()
         self.contact_cache = None
