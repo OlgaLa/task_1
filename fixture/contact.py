@@ -1,5 +1,5 @@
 import re
-
+from selenium.webdriver.support.ui import Select
 from  model.parameters import Contact
 
 class ContactHelper:
@@ -285,19 +285,23 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
-    def add_contact_to_group(self):
+    def click_add_contact_to_group(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//div[@class='right']/select//option[1]").click()
         wd.find_element_by_name("add").click()
 
-    def delete_contact_from_group(self):
+    def click_remove_contact_from_group(self):
         wd = self.app.wd
         wd.find_element_by_name("remove").click()
 
-    def select_group(self):
+    def select_group_top_dropdown(self, group_name):
         wd = self.app.wd
-        wd.find_element_by_xpath("//form[@id='right']/select//option[3]").click()
+        wd.find_element_by_xpath("//form[@id='right']/select//option[1]").click()
+        dropdown = wd.find_element_by_name('group')
+        select = Select(dropdown)
+        select.select_by_visible_text(group_name)
 
-
-
-
+    def select_group_bottom_dropdown(self, group_name):
+        wd = self.app.wd
+        dropdown = wd.find_element_by_name('to_group')
+        select = Select(dropdown)
+        select.select_by_visible_text(group_name)
